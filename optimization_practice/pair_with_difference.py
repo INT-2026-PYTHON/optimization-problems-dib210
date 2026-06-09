@@ -64,7 +64,6 @@ k    = 9
 Output Example 2:
 Brute Force: False  # O(n^2)
 Optimized:   False  # O(n)
-
 -------------------------------------------------
 Explanation:
 For [1, 5, 3, 4, 2] and k = 3:
@@ -79,3 +78,26 @@ overall O(n) algorithm.
 =================================================
 
 """
+def has_pair_brute(nums, k):
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if abs(nums[i] - nums[j]) == k:
+                return True
+    return False
+
+
+def has_pair_fast(nums, k):
+    num_set = set(nums)
+
+    for x in nums:
+        if (x + k) in num_set or (x - k) in num_set:
+            return True
+
+    return False
+
+
+nums = list(map(int, input("Enter numbers").split()))
+k = int(input("Enter value of k "))
+
+print("Brute Force:", has_pair_brute(nums, k))
+print("Optimized:  ", has_pair_fast(nums, k))
